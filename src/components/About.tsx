@@ -1,0 +1,147 @@
+import React, { useEffect, useRef } from 'react';
+import { Monitor, Code, Layout, Lightbulb, Cpu, Rocket } from 'lucide-react';
+
+const About: React.FC = () => {
+  const sectionRef = useRef<HTMLElement>(null);
+  const skillsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            entry.target.classList.add('opacity-100');
+          }
+        });
+      },
+      {
+        threshold: 0.1,
+      }
+    );
+
+    if (sectionRef.current) {
+      observer.observe(sectionRef.current);
+    }
+
+    if (skillsRef.current) {
+      observer.observe(skillsRef.current);
+    }
+
+    return () => {
+      if (sectionRef.current) {
+        observer.unobserve(sectionRef.current);
+      }
+      if (skillsRef.current) {
+        observer.unobserve(skillsRef.current);
+      }
+    };
+  }, []);
+
+  const skills = [
+    {
+      name: 'Frontend Development',
+      icon: <Monitor className="h-6 w-6" />,
+      description: 'Creating responsive, accessible, and performant user interfaces.',
+      technologies: ['React', 'Vue', 'HTML/CSS', 'JavaScript', 'TypeScript'],
+    },
+    {
+      name: 'Backend Development',
+      icon: <Code className="h-6 w-6" />,
+      description: 'Building robust server-side applications and APIs.',
+      technologies: ['Node.js', 'Express', 'Python', 'Java', 'SQL'],
+    },
+    {
+      name: 'UI/UX Design',
+      icon: <Layout className="h-6 w-6" />,
+      description: 'Designing beautiful and intuitive user experiences.',
+      technologies: ['Figma', 'Adobe XD', 'Tailwind CSS', 'Material UI'],
+    },
+    {
+      name: 'Problem Solving',
+      icon: <Lightbulb className="h-6 w-6" />,
+      description: 'Finding elegant solutions to complex problems.',
+      technologies: ['Algorithms', 'Data Structures', 'System Design'],
+    },
+    {
+      name: 'DevOps',
+      icon: <Cpu className="h-6 w-6" />,
+      description: 'Streamlining development and deployment processes.',
+      technologies: ['Docker', 'CI/CD', 'AWS', 'Git', 'GitHub Actions'],
+    },
+    {
+      name: 'Project Management',
+      icon: <Rocket className="h-6 w-6" />,
+      description: 'Leading projects from conception to completion.',
+      technologies: ['Agile', 'Scrum', 'Jira', 'Trello'],
+    }
+  ];
+
+  return (
+    <section
+      id="about"
+      ref={sectionRef}
+      className="py-20 opacity-0 transition-opacity duration-1000"
+    >
+      <div className="container mx-auto px-4">
+        <div className="max-w-4xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold mb-8 text-center">
+            About Me
+          </h2>
+          <div className="mb-12 bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md">
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              I'm a passionate software developer specializing in creating beautiful, functional, 
+              and user-friendly applications. With a strong foundation in both front-end and back-end 
+              technologies, I bring a comprehensive approach to problem-solving.
+            </p>
+            <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
+              My journey in tech began with a curiosity about how things work, which evolved into a 
+              love for creating digital experiences that delight users. I enjoy the challenge of 
+              turning complex requirements into elegant solutions.
+            </p>
+            <p className="text-lg text-gray-700 dark:text-gray-300">
+              When I'm not coding, you'll find me exploring new technologies, contributing to 
+              open-source projects, or sharing knowledge with the developer community.
+            </p>
+          </div>
+
+          <h3 className="text-2xl font-bold mb-8 text-center">
+            Skills & Expertise
+          </h3>
+          <div 
+            ref={skillsRef} 
+            className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 opacity-0 transition-opacity duration-1000"
+          >
+            {skills.map((skill, index) => (
+              <div 
+                key={index} 
+                className="bg-white dark:bg-gray-800 p-6 rounded-xl shadow-md hover:shadow-lg transition-all duration-300"
+              >
+                <div className="flex items-center mb-4">
+                  <div className="p-3 bg-blue-100 dark:bg-blue-900/30 rounded-lg text-blue-600 dark:text-blue-400 mr-4">
+                    {skill.icon}
+                  </div>
+                  <h4 className="text-xl font-medium">{skill.name}</h4>
+                </div>
+                <p className="text-gray-600 dark:text-gray-400 mb-4">
+                  {skill.description}
+                </p>
+                <div className="flex flex-wrap gap-2">
+                  {skill.technologies.map((tech, techIndex) => (
+                    <span 
+                      key={techIndex}
+                      className="px-2 py-1 bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 rounded text-xs"
+                    >
+                      {tech}
+                    </span>
+                  ))}
+                </div>
+              </div>
+            ))}
+          </div>
+        </div>
+      </div>
+    </section>
+  );
+};
+
+export default About;
