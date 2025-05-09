@@ -6,4 +6,11 @@ export const projects = [
     technologies: ['Python', 'OpenCV', 'MediaPipe', 'numpy', 'pycaw '],
     repoUrl: 'https://github.com/sharkspidy/VolumeCtrl'
   },
+  {
+    title: 'BG_Changer',
+    description: 'Just a simple background changer! ',
+    image: '/images/p2.png',
+    technologies: ['Python', 'OpenCV', 'MediaPipe', 'numpy', 'cvzone'],
+    repoUrl: 'https://github.com/sharkspidy/BGRemove_CV'
+  },
 ];
