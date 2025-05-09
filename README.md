@@ -22,12 +22,6 @@ A modern, responsive personal website showcasing skills, projects, and social me
 - Lucide React (for icons)
 
 ## Getting Started
-
-### Prerequisites
-
-- Node.js (v14 or higher)
-- npm or yarn
-
 ### Installation
 
 1. Clone the repository:
@@ -70,11 +64,4 @@ A modern, responsive personal website showcasing skills, projects, and social me
 └── tsconfig.json
 ```
 
-## Deployment
-
-This site can be easily deployed to platforms like Netlify, Vercel, or GitHub Pages.
-
-
-## Author
-
-SharkSpidy
+Made With 💙 By Joe[https://github.com/SharkSpidy]
