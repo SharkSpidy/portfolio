@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Monitor, Code, Layout, Lightbulb, Cpu, Rocket, Camera, Eye, Joystick } from 'lucide-react';
+import { Code, Layout, Lightbulb, Rocket, Eye, Joystick } from 'lucide-react';
 
 const About: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
