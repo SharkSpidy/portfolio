@@ -40,27 +40,26 @@ const Hero: React.FC = () => {
     <section id="hero" className="min-h-screen flex flex-col justify-center items-center text-center pt-16 pb-8">
       <div className="max-w-4xl mx-auto px-4 opacity-0 transition-opacity duration-1000" ref={textRef}>
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          Hi, I'm <span className="text-blue-600 dark:text-blue-400">SharkSpidy</span>
+          Hi, I'm <span className="text-blue-600 dark:text-blue-500">Joe</span>
         </h1>
         <h2 className="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-300 mb-8">
-          Developer & Designer crafting digital experiences
+          Computer Vision Engineer And UI Developer
         </h2>
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-          I create beautiful, functional, and user-centered digital experiences. 
-          Let's turn your ideas into reality.
+          Just a kid who has a lot of ideas!!!
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a
             href="#projects"
             className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
           >
-            View My Work
+            See the stuff I made
           </a>
           <a
             href="#contact"
             className="px-8 py-3 bg-transparent border-2 border-gray-300 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 text-gray-800 dark:text-gray-200 font-medium rounded-lg transition-all duration-300"
           >
-            Get In Touch
+            Talk To Me!
           </a>
         </div>
       </div>
