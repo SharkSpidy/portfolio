@@ -64,4 +64,4 @@ A modern, responsive personal website showcasing skills, projects, and social me
 └── tsconfig.json
 ```
 
-Made With 💙 By Joe[https://github.com/SharkSpidy]
+Made With 💙 By Joe [https://github.com/SharkSpidy]
