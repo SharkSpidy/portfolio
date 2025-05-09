@@ -41,7 +41,7 @@ const Header: React.FC<HeaderProps> = ({ darkMode }) => {
           href="#hero"
           className="text-2xl font-bold tracking-tight hover:text-blue-600 dark:hover:text-blue-400 transition-colors"
         >
-          SharkSpidy
+          Joseph Shibu
         </a>
 
         {/* Desktop Menu */}
