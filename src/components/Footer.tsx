@@ -11,7 +11,7 @@ const Footer: React.FC = () => {
           <div className="mb-6 md:mb-0">
             <h3 className="text-xl font-bold">SharkSpidy</h3>
             <p className="text-gray-600 dark:text-gray-400 mt-2">
-              Building digital experiences with passion.
+              Ten'yo Jubaku
             </p>
           </div>
           
@@ -29,8 +29,8 @@ const Footer: React.FC = () => {
           
           <div className="mt-4 md:mt-0 flex items-center text-sm text-gray-600 dark:text-gray-400">
             <span>Made with</span>
-            <Heart className="h-4 w-4 mx-1 text-red-500" />
-            <span>using React & Tailwind CSS</span>
+            <Heart className="h-5 w-5 mx-2 text-red-500" />
+            <span>By Joe</span>
           </div>
         </div>
       </div>
