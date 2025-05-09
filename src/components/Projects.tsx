@@ -71,14 +71,6 @@ const Projects: React.FC = () => {
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300 flex items-end">
                   <div className="p-4 w-full flex justify-between items-center">
                     <a
-                      href={project.demoUrl}
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-white flex items-center gap-1 text-sm hover:text-blue-300 transition-colors"
-                    >
-                      <ExternalLink className="h-4 w-4" /> Live Demo
-                    </a>
-                    <a
                       href={project.repoUrl}
                       target="_blank"
                       rel="noopener noreferrer"
