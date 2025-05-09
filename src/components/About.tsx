@@ -89,18 +89,17 @@ const About: React.FC = () => {
           </h2>
           <div className="mb-12 bg-white dark:bg-gray-800 rounded-xl p-8 shadow-md">
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              I'm a passionate software developer specializing in creating beautiful, functional, 
-              and user-friendly applications. With a strong foundation in both front-end and back-end 
-              technologies, I bring a comprehensive approach to problem-solving.
+              I am just another programmer, or so one may think! Heyyy Guys!! Im Joseph, Call me Joe!
+              Engineer, Musician and Above all, Child Of The Almighty!💙
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300 mb-4">
-              My journey in tech began with a curiosity about how things work, which evolved into a 
-              love for creating digital experiences that delight users. I enjoy the challenge of 
-              turning complex requirements into elegant solutions.
+             Ever since I was a kid, I was always a geek when it came to fixing my TV, my old desktop computer and even the 
+              router! And guess what! I STILL AM!
             </p>
             <p className="text-lg text-gray-700 dark:text-gray-300">
-              When I'm not coding, you'll find me exploring new technologies, contributing to 
-              open-source projects, or sharing knowledge with the developer community.
+              I love meeting people! That was once something that scared me! (Dont know why im telling it here lol)
+              Anywho!! Feel free to hit me up! If its hours of yap or even just vibing to BoyWithUke!
+              Im Down!! 
             </p>
           </div>
 
