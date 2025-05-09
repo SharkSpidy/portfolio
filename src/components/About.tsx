@@ -1,5 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { Monitor, Code, Layout, Lightbulb, Cpu, Rocket } from 'lucide-react';
+import { Monitor, Code, Layout, Lightbulb, Cpu, Rocket, Camera, Eye, Joystick } from 'lucide-react';
 
 const About: React.FC = () => {
   const sectionRef = useRef<HTMLElement>(null);
@@ -39,9 +39,9 @@ const About: React.FC = () => {
 
   const skills = [
     {
-      name: 'Frontend Development',
-      icon: <Monitor className="h-6 w-6" />,
-      description: 'Creating responsive, accessible, and performant user interfaces.',
+      name: 'Computer Vision Engineer',
+      icon: <Eye className="h-6 w-6" />,
+      description: 'Creating responsive, accessible, and performant CV projects.',
       technologies: ['React', 'Vue', 'HTML/CSS', 'JavaScript', 'TypeScript'],
     },
     {
@@ -63,16 +63,16 @@ const About: React.FC = () => {
       technologies: ['Algorithms', 'Data Structures', 'System Design'],
     },
     {
-      name: 'DevOps',
-      icon: <Cpu className="h-6 w-6" />,
-      description: 'Streamlining development and deployment processes.',
-      technologies: ['Docker', 'CI/CD', 'AWS', 'Git', 'GitHub Actions'],
+      name: 'Game Dev',
+      icon: <Joystick className="h-6 w-6" />,
+      description: 'Making models, textures and environments in different game engines',
+      technologies: ['Unity', 'Unreal Engine', 'Blender', 'AR/VR' ],
     },
     {
       name: 'Project Management',
       icon: <Rocket className="h-6 w-6" />,
       description: 'Leading projects from conception to completion.',
-      technologies: ['Agile', 'Scrum', 'Jira', 'Trello'],
+      technologies: ['Agile', 'Git', 'GitHub Actions', 'AWS'],
     }
   ];
 
