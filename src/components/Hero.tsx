@@ -40,13 +40,13 @@ const Hero: React.FC = () => {
     <section id="hero" className="min-h-screen flex flex-col justify-center items-center text-center pt-16 pb-8">
       <div className="max-w-4xl mx-auto px-4 opacity-0 transition-opacity duration-1000" ref={textRef}>
         <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          Hi, I'm <span className="text-blue-600 dark:text-blue-500">Joe</span>
+          Hi, I'm <span className="text-blue-600 dark:text-blue-500">Joseph Shibu</span>
         </h1>
         <h2 className="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-300 mb-8">
-          Computer Vision Engineer And UI Developer
+          Computer Vision Engineer And UI Developer!
         </h2>
         <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-          Just a kid who has a lot of ideas!!!
+          Just a kid who has a lot of ideas!!
         </p>
         <div className="flex flex-col sm:flex-row gap-4 justify-center">
           <a

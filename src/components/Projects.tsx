@@ -48,10 +48,11 @@ const Projects: React.FC = () => {
     >
       <div className="container mx-auto px-4">
         <h2 className="text-3xl md:text-4xl font-bold mb-4 text-center">
-          My Projects
+          I made these!!
         </h2>
         <p className="text-gray-600 dark:text-gray-400 text-center max-w-2xl mx-auto mb-12">
-          Here are some of the projects I've worked on. Each one represents a unique challenge and learning experience.
+          Here are some of the things I've worked on. Each one represents a unique challenge 
+          (obviously) and learning experience (not so much).
         </p>
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {projects.map((project, index) => (
