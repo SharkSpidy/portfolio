@@ -30,7 +30,7 @@ const Footer: React.FC = () => {
           <div className="mt-4 md:mt-0 flex items-center text-sm text-gray-600 dark:text-gray-400">
             <span>Made with</span>
             <Heart className="h-5 w-5 mx-2 text-red-500" />
-            <span>By Joe</span>
+            <span>By Marina And Joe</span>
           </div>
         </div>
       </div>
