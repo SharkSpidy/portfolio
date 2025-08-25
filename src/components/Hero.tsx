@@ -1,79 +1,56 @@
-import React, { useEffect, useRef } from 'react';
-import { ChevronDown } from 'lucide-react';
+import { motion } from "framer-motion";
 
-const Hero: React.FC = () => {
-  const textRef = useRef<HTMLHeadingElement>(null);
-
-  useEffect(() => {
-    const observer = new IntersectionObserver(
-      (entries) => {
-        entries.forEach((entry) => {
-          if (entry.isIntersecting) {
-            entry.target.classList.add('animate-fade-in');
-          }
-        });
-      },
-      {
-        threshold: 0.1,
-      }
-    );
-
-    if (textRef.current) {
-      observer.observe(textRef.current);
-    }
-
-    return () => {
-      if (textRef.current) {
-        observer.unobserve(textRef.current);
-      }
-    };
-  }, []);
-
-  const scrollToProjects = () => {
-    const projectsSection = document.getElementById('projects');
-    if (projectsSection) {
-      projectsSection.scrollIntoView({ behavior: 'smooth' });
-    }
-  };
-
+export default function Hero() {
   return (
-    <section id="hero" className="min-h-screen flex flex-col justify-center items-center text-center pt-16 pb-8">
-      <div className="max-w-4xl mx-auto px-4 opacity-0 transition-opacity duration-1000" ref={textRef}>
-        <h1 className="text-5xl md:text-7xl font-bold mb-6 leading-tight">
-          Hi, I'm <span className="text-blue-600 dark:text-blue-500">Joseph Shibu</span>
-        </h1>
-        <h2 className="text-2xl md:text-3xl font-medium text-gray-700 dark:text-gray-300 mb-8">
-          Computer Vision Engineer And UI Developer!
-        </h2>
-        <p className="text-xl text-gray-600 dark:text-gray-400 mb-12 max-w-2xl mx-auto">
-          Just a kid who has a lot of ideas!!
-        </p>
-        <div className="flex flex-col sm:flex-row gap-4 justify-center">
-          <a
-            href="#projects"
-            className="px-8 py-3 bg-blue-600 hover:bg-blue-700 text-white font-medium rounded-lg transition-all duration-300 shadow-lg hover:shadow-xl transform hover:-translate-y-1"
-          >
-            See the stuff I made
-          </a>
-          <a
-            href="#contact"
-            className="px-8 py-3 bg-transparent border-2 border-gray-300 dark:border-gray-700 hover:border-blue-600 dark:hover:border-blue-400 text-gray-800 dark:text-gray-200 font-medium rounded-lg transition-all duration-300"
-          >
-            Talk To Me!
-          </a>
-        </div>
-      </div>
-      <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-        <button
-          onClick={scrollToProjects}
-          aria-label="Scroll to projects"
-          className="p-2 rounded-full bg-gray-200 dark:bg-gray-800 hover:bg-gray-300 dark:hover:bg-gray-700 transition-colors"
+    <section
+      id="home"
+      className="min-h-screen flex flex-col justify-center items-center text-center px-6"
+    >
+      {/* Greeting */}
+      <motion.h1
+        initial={{ opacity: 0, y: 40 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white"
+      >
+        Hi, I'm{" "}
+        <span className="bg-gradient-to-r from-purple-600 to-purple-800 dark:from-purple-400 dark:to-purple-600 bg-clip-text text-transparent">
+          Joseph Shibu
+        </span>
+      </motion.h1>
+
+      {/* Subtitle */}
+      <motion.p
+        initial={{ opacity: 0, y: 20 }}
+        animate={{ opacity: 1, y: 0 }}
+        transition={{ delay: 0.4, duration: 0.8 }}
+        className="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl"
+      >
+        A passionate Computer Vision & Web Developer, turning ideas into
+        interactive realities.
+      </motion.p>
+
+      {/* Buttons */}
+      <motion.div
+        initial={{ opacity: 0, scale: 0.9 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.8, duration: 0.6 }}
+        className="mt-8 flex gap-4 flex-wrap justify-center"
+      >
+        <a
+          href="#projects"
+          className="px-6 py-3 rounded-2xl bg-purple-600 text-white font-medium hover:bg-purple-700 dark:hover:bg-purple-500 transition transform hover:scale-105 shadow-lg"
         >
-          <ChevronDown className="h-6 w-6 text-gray-700 dark:text-gray-300" />
-        </button>
-      </div>
+          View Projects
+        </a>
+        <a
+          href="/resume.pdf"
+          target="_blank"
+          className="px-6 py-3 rounded-2xl bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 font-medium hover:bg-gray-300 dark:hover:bg-gray-700 transition transform hover:scale-105 shadow-lg"
+        >
+          Download Resume
+        </a>
+      </motion.div>
     </section>
   );
-};
-
-export default Hero;
+}
