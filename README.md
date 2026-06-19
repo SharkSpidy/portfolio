@@ -1,67 +1,89 @@
-# SharkSpidy Portfolio Website
+# Portfolio — React + Vite + TypeScript
 
-A modern, responsive personal website showcasing skills, projects, and social media presence. Built with React, TypeScript, and Tailwind CSS.
+A minimalistic, dark-mode personal portfolio built with React, Vite, and TypeScript. No UI library dependencies — all styling via CSS Modules with CSS custom properties.
 
-## Features
+## Stack
 
-- Responsive design that looks great on all devices
-- Dynamic light/dark mode toggle
-- Animated particle background
-- Interactive UI with smooth animations
-- Project showcase with filtering capabilities
-- Contact form for professional inquiries
-- Social media integration
-- SEO-friendly structure
-
-## Technologies Used
-
-- React
-- TypeScript
-- Tailwind CSS
-- Vite (for build and development)
-- Lucide React (for icons)
+- **React 18** with functional components and hooks
+- **Vite 5** for instant HMR and fast builds
+- **TypeScript** (strict mode)
+- **CSS Modules** for scoped, zero-runtime styling
+- **Space Grotesk** + **Inter** via Google Fonts
 
 ## Getting Started
-### Installation
 
-1. Clone the repository:
-   ```bash
-   git clone https://github.com/sharkspidy/portfolio.git
-   cd portfolio-website
-   ```
+```bash
+# 1. Install dependencies
+npm install
 
-2. Install dependencies:
-   ```bash
-   npm install
-   ```
+# 2. Start the dev server (http://localhost:5173)
+npm run dev
 
-3. Start the development server:
-   ```bash
-   npm run dev
-   ```
+# 3. Build for production
+npm run build
 
-4. Build for production:
-   ```bash
-   npm run build
-   ```
+# 4. Preview the production build
+npm run preview
+```
+
+## Personalising Your Portfolio
+
+All content lives in one file — **`src/data/portfolio.ts`**.
+Open it and replace every `[placeholder]` with your real information:
+
+| Field | Where |
+|---|---|
+| Name, email, status | `owner` object |
+| Skills list | `skills` array |
+| Work / education history | `experiences` array |
+| Projects | `projects` array |
+| Social links & resume | `socialLinks` array |
+
+The `[...]` brackets are intentional — search for `[` in your editor to find every placeholder at once.
 
 ## Project Structure
 
 ```
-├── public/
-├── src/
-|   |── images/        # images 
-│   ├── components/    # React components
-│   ├── data/          # Static data for projects and social links
-│   ├── types/         # TypeScript type definitions
-│   ├── utils/         # Utility functions and hooks
-│   ├── App.tsx        # Main application component
-│   ├── index.css      # Global styles
-│   └── main.tsx       # Application entry point
-├── index.html
-├── package.json
-├── tailwind.config.js
-└── tsconfig.json
+src/
+├── components/
+│   ├── Navbar.tsx / .module.css
+│   ├── Hero.tsx / .module.css
+│   ├── Skills.tsx / .module.css
+│   ├── Experience.tsx / .module.css
+│   ├── Projects.tsx / .module.css
+│   ├── Contact.tsx / .module.css
+│   ├── Footer.tsx / .module.css
+│   ├── Icons.tsx          ← SVG icon components
+│   └── useScrollReveal.ts ← Intersection Observer hook
+├── data/
+│   └── portfolio.ts       ← ALL YOUR CONTENT LIVES HERE
+├── styles/
+│   └── index.css          ← Global reset + CSS tokens
+├── App.tsx
+└── main.tsx
 ```
 
-Made With 💙 By [Joe](https://bento.me/SharkSpidy)
+## Design Tokens (CSS custom properties)
+
+Defined in `src/styles/index.css` under `:root`:
+
+```css
+--bg:       #0A0F1E   /* page background */
+--bg-card:  #111827   /* card background */
+--text:     #E8EDF5   /* primary text */
+--muted:    #8899BB   /* secondary text */
+--accent:   #6366F1   /* indigo — primary accent */
+--teal:     #2DD4BF   /* teal — secondary accent */
+```
+
+Change these four lines to retheme the entire site instantly.
+
+## Deploying
+
+**GitHub Pages (recommended):**
+```bash
+npm run build
+# push the dist/ folder to your gh-pages branch
+```
+
+**Vercel / Netlify:** connect your repo and set build command to `npm run build`, output directory to `dist`.

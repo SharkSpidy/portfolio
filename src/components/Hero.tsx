@@ -1,56 +1,53 @@
-import { motion } from "framer-motion";
+import React from 'react';
+import { owner } from '../data/portfolio';
+import styles from './Hero.module.css';
 
-export default function Hero() {
-  return (
-    <section
-      id="home"
-      className="min-h-screen flex flex-col justify-center items-center text-center px-6"
-    >
-      {/* Greeting */}
-      <motion.h1
-        initial={{ opacity: 0, y: 40 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.8 }}
-        className="text-4xl md:text-6xl font-bold text-gray-900 dark:text-white"
-      >
-        Hi, I'm{" "}
-        <span className="bg-gradient-to-r from-purple-600 to-purple-800 dark:from-purple-400 dark:to-purple-600 bg-clip-text text-transparent">
-          Joseph Shibu
-        </span>
-      </motion.h1>
+const Hero: React.FC = () => (
+  <section id="hero" className={styles.hero}>
+    {/* ambient glows */}
+    <div className={styles.glowTopRight} aria-hidden />
+    <div className={styles.glowBottomLeft} aria-hidden />
 
-      {/* Subtitle */}
-      <motion.p
-        initial={{ opacity: 0, y: 20 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ delay: 0.4, duration: 0.8 }}
-        className="mt-4 text-lg md:text-xl text-gray-700 dark:text-gray-300 max-w-2xl"
-      >
-        A passionate Computer Vision & Web Developer, turning ideas into
-        interactive realities.
-      </motion.p>
+    <div className="container">
+      <div className={styles.inner}>
+        {/* LEFT — name + tagline */}
+        <div className={styles.left}>
+          <div className={styles.availability}>
+            <span className={styles.dot} />
+            {owner.status}
+          </div>
 
-      {/* Buttons */}
-      <motion.div
-        initial={{ opacity: 0, scale: 0.9 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.8, duration: 0.6 }}
-        className="mt-8 flex gap-4 flex-wrap justify-center"
-      >
-        <a
-          href="#projects"
-          className="px-6 py-3 rounded-2xl bg-purple-600 text-white font-medium hover:bg-purple-700 dark:hover:bg-purple-500 transition transform hover:scale-105 shadow-lg"
-        >
-          View Projects
-        </a>
-        <a
-          href="/resume.pdf"
-          target="_blank"
-          className="px-6 py-3 rounded-2xl bg-gray-200 dark:bg-gray-800 text-gray-800 dark:text-gray-200 font-medium hover:bg-gray-300 dark:hover:bg-gray-700 transition transform hover:scale-105 shadow-lg"
-        >
-          Download Resume
-        </a>
-      </motion.div>
-    </section>
-  );
-}
+          <h1 className={styles.name}>
+            <span className={styles.firstName}>{owner.firstName}</span>
+            <span className={styles.lastName}>{owner.lastName}</span>
+          </h1>
+
+          <p className={styles.tagline}>{owner.tagline}</p>
+
+          <div className={styles.actions}>
+            <a href="#projects" className={styles.btnPrimary}>See My Work</a>
+            <a href="#contact"  className={styles.btnOutline}>Get in Touch</a>
+          </div>
+        </div>
+
+        {/* RIGHT — stat cards */}
+        <div className={styles.right}>
+          <div className={`${styles.statCard} reveal`}>
+            <div className={styles.num}>{owner.repoCount}<span>+</span></div>
+            <div className={styles.desc}>Public repositories on GitHub</div>
+          </div>
+          <div className={`${styles.statCard} reveal`} style={{ transitionDelay: '0.1s' }}>
+            <div className={styles.num}>{owner.projectsShipped}<span>+</span></div>
+            <div className={styles.desc}>Projects shipped to production</div>
+          </div>
+          <div className={`${styles.statCard} reveal`} style={{ transitionDelay: '0.2s' }}>
+            <div className={styles.num}>{owner.yearsExperience}<span>yr</span></div>
+            <div className={styles.desc}>Years of professional experience</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+);
+
+export default Hero;
