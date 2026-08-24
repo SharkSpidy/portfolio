@@ -5,7 +5,8 @@ import Footer from "./components/Footer";
 
 export default function App() {
   return (
-    <div className="min-h-screen bg-base-950">
+    <div className="min-h-screen bg-ink">
+      <div className="grain-overlay" />
       <Navbar />
       <main>
         <Hero />

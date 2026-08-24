@@ -5,45 +5,37 @@ export default {
   theme: {
     extend: {
       colors: {
-        base: {
-          950: "#050507",
-          900: "#0a0a0f",
-          800: "#111116",
-          700: "#1a1a22",
+        // Warm near-black "ink" instead of a neutral/blue-black —
+        // reads as paper-and-print, not "dashboard dark mode".
+        ink: {
+          DEFAULT: "#0d0c0a",
+          soft: "#151310",
+          line: "#2a2722",
         },
-        accent: {
-          indigo: "#6366f1",
-          violet: "#8b5cf6",
-          cyan: "#22d3ee",
+        paper: {
+          DEFAULT: "#f3efe6",
+          dim: "#a8a296",
+        },
+        // A single, punchy accent used sparingly — not a purple-to-cyan sweep.
+        acid: {
+          DEFAULT: "#ccff33",
+          dim: "#8fb524",
         },
       },
       fontFamily: {
+        // Serif display for headlines gives it an editorial, hand-set
+        // feel that generic AI-tool sites never reach for.
+        display: ["Fraunces", "serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
         mono: ["JetBrains Mono", "ui-monospace", "monospace"],
       },
       backgroundImage: {
-        "grid-pattern":
-          "linear-gradient(to right, rgba(255,255,255,0.04) 1px, transparent 1px), linear-gradient(to bottom, rgba(255,255,255,0.04) 1px, transparent 1px)",
-        "glow-gradient":
-          "radial-gradient(circle at 50% 0%, rgba(99,102,241,0.25), transparent 60%)",
-        "brand-gradient": "linear-gradient(90deg, #6366f1 0%, #8b5cf6 50%, #22d3ee 100%)",
+        // Subtle film-grain noise, not a radial glow.
+        grain:
+          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E\")",
       },
-      backgroundSize: {
-        grid: "40px 40px",
-      },
-      boxShadow: {
-        glow: "0 0 40px -10px rgba(99,102,241,0.45)",
-        "glow-cyan": "0 0 40px -10px rgba(34,211,238,0.4)",
-      },
-      animation: {
-        "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
-        shimmer: "shimmer 2s linear infinite",
-      },
-      keyframes: {
-        shimmer: {
-          "0%": { backgroundPosition: "-1000px 0" },
-          "100%": { backgroundPosition: "1000px 0" },
-        },
+      letterSpacing: {
+        widest2: "0.25em",
       },
     },
   },

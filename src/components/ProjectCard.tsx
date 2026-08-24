@@ -1,117 +1,70 @@
-import { motion } from "framer-motion";
-import { ArrowUpRight, Globe2, ImageOff } from "lucide-react";
+import { ArrowUpRight } from "lucide-react";
 import { useProjectData } from "../hooks/useProjectData";
-import SkeletonCard from "./SkeletonCard";
+import ProjectImage from "./ProjectImage";
 
 interface ProjectCardProps {
   url: string;
-  /** Stagger index, used purely for the entrance animation delay */
   index: number;
+  isHovered: boolean;
+  onHover: (index: number | null) => void;
 }
 
 /**
- * ProjectCard — resolves live OG data for a single URL and renders it as a
- * polished preview card. Falls back to a skeleton while loading, and to a
- * minimal "unreachable" state if Microlink can't resolve the site.
+ * ProjectCard — one row in the project index. Text always renders
+ * immediately (useProjectData guarantees non-blocking fallback data),
+ * and silently upgrades in place once real OG metadata arrives.
+ *
+ * On desktop, the preview image is shown by the floating cursor panel in
+ * <Portfolio /> — this row stays lean and typographic. On mobile (no
+ * hover), a small inline thumbnail is shown instead so the image is
+ * still visible.
  */
-export default function ProjectCard({ url, index }: ProjectCardProps) {
-  const { data, status, error } = useProjectData(url);
-
-  if (status === "loading") {
-    return <SkeletonCard />;
-  }
-
-  if (status === "error" || !data) {
-    return <ErrorCard url={url} message={error ?? "Could not load preview"} />;
-  }
-
-  return (
-    <motion.a
-      href={url}
-      target="_blank"
-      rel="noopener noreferrer"
-      initial={{ opacity: 0, y: 24 }}
-      whileInView={{ opacity: 1, y: 0 }}
-      viewport={{ once: true, margin: "-60px" }}
-      transition={{ duration: 0.5, delay: Math.min(index * 0.08, 0.4) }}
-      whileHover={{ y: -6 }}
-      className="group glass-panel relative flex flex-col overflow-hidden rounded-2xl
-                 transition-shadow duration-300 hover:shadow-glow hover:border-accent-indigo/40"
-    >
-      {/* Preview image */}
-      <div className="relative aspect-video w-full overflow-hidden bg-base-800">
-        {data.imageUrl ? (
-          <img
-            src={data.imageUrl}
-            alt={`Screenshot preview of ${data.title}`}
-            loading="lazy"
-            className="h-full w-full object-cover object-top transition-transform
-                       duration-500 ease-out group-hover:scale-105"
-          />
-        ) : (
-          <div className="flex h-full w-full items-center justify-center text-zinc-600">
-            <ImageOff size={28} />
-          </div>
-        )}
-
-        {/* Gradient overlay + "visit site" affordance on hover */}
-        <div
-          className="absolute inset-0 flex items-end justify-end bg-gradient-to-t
-                     from-base-950/80 via-transparent to-transparent p-3 opacity-0
-                     transition-opacity duration-300 group-hover:opacity-100"
-        >
-          <span className="flex items-center gap-1 rounded-full bg-white/10 px-3 py-1.5
-                            text-xs font-medium text-white backdrop-blur-md">
-            Visit site <ArrowUpRight size={14} />
-          </span>
-        </div>
-      </div>
-
-      {/* Text content */}
-      <div className="flex flex-1 flex-col gap-2 p-5">
-        <h3 className="line-clamp-1 text-lg font-semibold text-white">
-          {data.title}
-        </h3>
-        <p className="line-clamp-2 text-sm leading-relaxed text-zinc-400">
-          {data.description}
-        </p>
-
-        <div className="mt-3 flex items-center justify-between border-t border-white/5 pt-3">
-          <span className="flex items-center gap-1.5 text-xs font-mono text-zinc-500">
-            <Globe2 size={13} className="text-accent-cyan" />
-            {data.domain}
-          </span>
-          <ArrowUpRight
-            size={16}
-            className="text-zinc-500 transition-colors group-hover:text-accent-indigo"
-          />
-        </div>
-      </div>
-    </motion.a>
-  );
-}
-
-/** Minimal fallback card shown when Microlink fails to resolve a URL. */
-function ErrorCard({ url, message }: { url: string; message: string }) {
-  const domain = (() => {
-    try {
-      return new URL(url).hostname.replace(/^www\./, "");
-    } catch {
-      return url;
-    }
-  })();
+export default function ProjectCard({ url, index, isHovered, onHover }: ProjectCardProps) {
+  const { data } = useProjectData(url);
+  const number = String(index + 1).padStart(2, "0");
 
   return (
     <a
       href={url}
       target="_blank"
       rel="noopener noreferrer"
-      className="glass-panel flex flex-col items-center justify-center gap-2 rounded-2xl
-                 aspect-[4/3] p-6 text-center transition-colors hover:border-accent-indigo/40"
+      onMouseEnter={() => onHover(index)}
+      onMouseLeave={() => onHover(null)}
+      className="group flex flex-col gap-4 border-b border-ink-line py-6 transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:py-8"
     >
-      <ImageOff size={22} className="text-zinc-600" />
-      <p className="text-sm font-medium text-zinc-300">{domain}</p>
-      <p className="text-xs text-zinc-600">{message} — click to visit anyway</p>
+      <div className="flex items-start gap-4 sm:items-center sm:gap-6">
+        <span className="font-mono text-xs tabular-nums text-paper-dim">{number}</span>
+
+        {/* Inline thumbnail — mobile only, since there's no hover state to reveal one */}
+        <div className="h-16 w-24 shrink-0 overflow-hidden border border-ink-line sm:hidden">
+          <ProjectImage url={url} title={data.title} className="h-full w-full object-cover object-top" />
+        </div>
+
+        <div className="min-w-0">
+          <h3
+            className={`truncate font-display text-2xl transition-colors duration-200 sm:text-3xl ${
+              isHovered ? "text-acid" : "text-paper"
+            }`}
+          >
+            {data.title}
+          </h3>
+          <p className="mt-1 line-clamp-1 max-w-md text-sm text-paper-dim sm:line-clamp-1">
+            {data.description}
+          </p>
+        </div>
+      </div>
+
+      <div className="flex items-center gap-4 pl-[3.25rem] sm:pl-0">
+        <span className="font-mono text-[11px] uppercase tracking-widest2 text-paper-dim">
+          {data.domain}
+        </span>
+        <ArrowUpRight
+          size={18}
+          className={`shrink-0 transition-all duration-200 ${
+            isHovered ? "-translate-y-0.5 translate-x-0.5 text-acid" : "text-paper-dim"
+          }`}
+        />
+      </div>
     </a>
   );
 }

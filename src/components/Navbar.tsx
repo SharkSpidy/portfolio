@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import { motion } from "framer-motion";
+import { SITE } from "../config/siteConfig";
 
 const NAV_LINKS = [
   { label: "Work", href: "#work" },
@@ -17,39 +17,36 @@ export default function Navbar() {
   }, []);
 
   return (
-    <motion.header
-      initial={{ opacity: 0, y: -16 }}
-      animate={{ opacity: 1, y: 0 }}
-      transition={{ duration: 0.5 }}
+    <header
       className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
-        scrolled ? "glass-panel" : "bg-transparent"
+        scrolled ? "bg-ink/90 backdrop-blur-sm border-b border-ink-line" : "bg-transparent"
       }`}
     >
-      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
-        <a href="#" className="font-mono text-lg font-bold text-white">
-          {"<"}Your<span className="text-gradient">Name</span>{" />"}
+      <nav className="mx-auto flex max-w-6xl items-center justify-between px-6 py-5 sm:px-10 lg:px-16">
+        <a href="#" className="font-display text-lg tracking-tight text-paper">
+          Joseph Shibu<span className="text-acid">.</span>
         </a>
 
-        <div className="hidden items-center gap-8 sm:flex">
-          {NAV_LINKS.map((link) => (
+        <div className="hidden items-center gap-10 sm:flex">
+          {NAV_LINKS.map((link, i) => (
             <a
               key={link.href}
               href={link.href}
-              className="text-sm font-medium text-zinc-400 transition-colors hover:text-white"
+              className="link-underline font-mono text-xs uppercase tracking-widest2 text-paper-dim hover:text-paper transition-colors"
             >
+              <span className="mr-1.5 text-acid">0{i + 1}</span>
               {link.label}
             </a>
           ))}
         </div>
 
         <a
-          href="#contact"
-          className="rounded-full bg-brand-gradient px-5 py-2 text-sm font-semibold text-white
-                     shadow-glow transition-transform hover:scale-105"
+          href={`mailto:${SITE.email}`}
+          className="hairline rounded-none px-4 py-2 font-mono text-xs uppercase tracking-widest2 text-paper transition-colors hover:bg-acid hover:text-ink hover:border-acid"
         >
-          Hire Me
+          Say Hello
         </a>
       </nav>
-    </motion.header>
+    </header>
   );
 }

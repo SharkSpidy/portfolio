@@ -8,48 +8,65 @@
   }
 
   body {
-    @apply bg-base-950 text-zinc-200 font-sans antialiased;
+    @apply bg-ink text-paper font-sans antialiased;
   }
 
   ::selection {
-    @apply bg-accent-indigo/40 text-white;
+    @apply bg-acid text-ink;
   }
 
-  /* Slim, themed scrollbar */
+  /* Slim, ink-toned scrollbar */
   ::-webkit-scrollbar {
-    width: 10px;
+    width: 8px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-base-950;
+    @apply bg-ink;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-base-700 rounded-full;
+    @apply bg-ink-line rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-accent-indigo/60;
+    @apply bg-acid-dim;
   }
 }
 
 @layer components {
-  /* Gradient text used for headline accents across the site */
-  .text-gradient {
-    @apply bg-brand-gradient bg-clip-text text-transparent;
+  /* Film-grain texture overlay applied once, fixed, over the whole page */
+  .grain-overlay {
+    @apply pointer-events-none fixed inset-0 z-[999] bg-grain;
   }
 
-  /* Reusable glass panel used by cards, nav, and modals */
-  .glass-panel {
-    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10;
+  /* Hairline border used everywhere instead of glass/blur panels */
+  .hairline {
+    @apply border border-ink-line;
   }
 
-  /* Shimmer effect for skeleton loaders */
+  /* Underline-on-hover link treatment, drawn with a real border so it
+     never looks like a generated "glow" effect */
+  .link-underline {
+    @apply relative inline-block;
+  }
+  .link-underline::after {
+    content: "";
+    @apply absolute left-0 -bottom-0.5 h-px w-0 bg-acid transition-all duration-300;
+  }
+  .link-underline:hover::after {
+    @apply w-full;
+  }
+
+  /* Shimmer for the small bits of copy that load asynchronously */
   .skeleton-shimmer {
     background: linear-gradient(
       90deg,
-      rgba(255, 255, 255, 0.04) 0%,
-      rgba(255, 255, 255, 0.09) 50%,
-      rgba(255, 255, 255, 0.04) 100%
+      rgba(243, 239, 230, 0.06) 0%,
+      rgba(243, 239, 230, 0.12) 50%,
+      rgba(243, 239, 230, 0.06) 100%
     );
     background-size: 1000px 100%;
-    @apply animate-shimmer;
+    animation: shimmer 1.8s linear infinite;
+  }
+  @keyframes shimmer {
+    0% { background-position: -1000px 0; }
+    100% { background-position: 1000px 0; }
   }
 }

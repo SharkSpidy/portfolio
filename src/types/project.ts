@@ -6,15 +6,6 @@
 export interface MicrolinkData {
   title: string | null;
   description: string | null;
-  screenshot: {
-    url: string;
-  } | null;
-  image: {
-    url: string;
-  } | null;
-  logo: {
-    url: string;
-  } | null;
   url: string;
 }
 
@@ -25,28 +16,28 @@ export interface MicrolinkResponse {
 
 /**
  * The normalized, UI-ready shape produced by useProjectData.
- * This is what every component consumes — never the raw API shape directly.
+ * Note: preview images are NOT part of this — they're resolved
+ * separately and synchronously by <ProjectImage />, so a slow or
+ * rate-limited metadata fetch never blocks the image from showing.
  */
 export interface ProjectData {
   /** The original URL from projectsConfig.ts — used as a stable React key */
   sourceUrl: string;
-  /** OG title, falls back to the hostname if missing */
+  /** OG title — falls back to the domain name until/unless enriched */
   title: string;
-  /** OG description, falls back to a generic string if missing */
+  /** OG description — falls back to a generic sentence until/unless enriched */
   description: string;
-  /** Screenshot (preferred) or OG image URL used as the card preview */
-  imageUrl: string | null;
-  /** Site favicon/logo, used as a small badge on the card */
-  logoUrl: string | null;
   /** The clean, human-readable domain (e.g. "hillsnblues.com") */
   domain: string;
+  /** True once real OG metadata has been fetched and applied */
+  isEnriched: boolean;
 }
 
 export type FetchStatus = "loading" | "success" | "error";
 
 export interface UseProjectDataResult {
-  data: ProjectData | null;
+  /** Always populated immediately (with fallbacks), never null/blocking */
+  data: ProjectData;
   status: FetchStatus;
-  /** Human-readable error message, only set when status === "error" */
   error: string | null;
 }
