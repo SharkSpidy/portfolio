@@ -1,54 +1,55 @@
-import React, { useEffect, useState } from 'react';
-import styles from './Navbar.module.css';
+import { useEffect, useState } from "react";
+import { motion } from "framer-motion";
 
-const Navbar: React.FC = () => {
+const NAV_LINKS = [
+  { label: "Work", href: "#work" },
+  { label: "About", href: "#about" },
+  { label: "Contact", href: "#contact" },
+];
+
+export default function Navbar() {
   const [scrolled, setScrolled] = useState(false);
-  const [menuOpen, setMenuOpen] = useState(false);
 
   useEffect(() => {
-    const onScroll = () => setScrolled(window.scrollY > 30);
-    window.addEventListener('scroll', onScroll, { passive: true });
-    return () => window.removeEventListener('scroll', onScroll);
+    const onScroll = () => setScrolled(window.scrollY > 12);
+    window.addEventListener("scroll", onScroll);
+    return () => window.removeEventListener("scroll", onScroll);
   }, []);
 
-  const closeMenu = () => setMenuOpen(false);
-
   return (
-    <>
-      <nav className={`${styles.nav} ${scrolled ? styles.scrolled : ''}`}>
-        <a href="#hero" className={styles.logo}>
-          <span className={styles.logoAccent}>//</span> [Your Name]
+    <motion.header
+      initial={{ opacity: 0, y: -16 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+      className={`fixed inset-x-0 top-0 z-50 transition-colors duration-300 ${
+        scrolled ? "glass-panel" : "bg-transparent"
+      }`}
+    >
+      <nav className="mx-auto flex max-w-7xl items-center justify-between px-6 py-4 sm:px-10 lg:px-16">
+        <a href="#" className="font-mono text-lg font-bold text-white">
+          {"<"}Your<span className="text-gradient">Name</span>{" />"}
         </a>
 
-        <ul className={styles.links}>
-          <li><a href="#skills">Skills</a></li>
-          <li><a href="#experience">Experience</a></li>
-          <li><a href="#projects">Projects</a></li>
-        </ul>
+        <div className="hidden items-center gap-8 sm:flex">
+          {NAV_LINKS.map((link) => (
+            <a
+              key={link.href}
+              href={link.href}
+              className="text-sm font-medium text-zinc-400 transition-colors hover:text-white"
+            >
+              {link.label}
+            </a>
+          ))}
+        </div>
 
-        <a href="#contact" className={styles.cta}>Let's Talk</a>
-
-        <button
-          className={`${styles.hamburger} ${menuOpen ? styles.open : ''}`}
-          onClick={() => setMenuOpen((v) => !v)}
-          aria-label="Toggle menu"
-          aria-expanded={menuOpen}
+        <a
+          href="#contact"
+          className="rounded-full bg-brand-gradient px-5 py-2 text-sm font-semibold text-white
+                     shadow-glow transition-transform hover:scale-105"
         >
-          <span />
-          <span />
-          <span />
-        </button>
+          Hire Me
+        </a>
       </nav>
-
-      {/* Mobile overlay */}
-      <div className={`${styles.mobileMenu} ${menuOpen ? styles.menuOpen : ''}`}>
-        <a href="#skills"     onClick={closeMenu}>Skills</a>
-        <a href="#experience" onClick={closeMenu}>Experience</a>
-        <a href="#projects"   onClick={closeMenu}>Projects</a>
-        <a href="#contact"    onClick={closeMenu}>Contact</a>
-      </div>
-    </>
+    </motion.header>
   );
-};
-
-export default Navbar;
+}

@@ -1,0 +1,55 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    @apply bg-base-950 text-zinc-200 font-sans antialiased;
+  }
+
+  ::selection {
+    @apply bg-accent-indigo/40 text-white;
+  }
+
+  /* Slim, themed scrollbar */
+  ::-webkit-scrollbar {
+    width: 10px;
+  }
+  ::-webkit-scrollbar-track {
+    @apply bg-base-950;
+  }
+  ::-webkit-scrollbar-thumb {
+    @apply bg-base-700 rounded-full;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    @apply bg-accent-indigo/60;
+  }
+}
+
+@layer components {
+  /* Gradient text used for headline accents across the site */
+  .text-gradient {
+    @apply bg-brand-gradient bg-clip-text text-transparent;
+  }
+
+  /* Reusable glass panel used by cards, nav, and modals */
+  .glass-panel {
+    @apply bg-white/[0.03] backdrop-blur-xl border border-white/10;
+  }
+
+  /* Shimmer effect for skeleton loaders */
+  .skeleton-shimmer {
+    background: linear-gradient(
+      90deg,
+      rgba(255, 255, 255, 0.04) 0%,
+      rgba(255, 255, 255, 0.09) 50%,
+      rgba(255, 255, 255, 0.04) 100%
+    );
+    background-size: 1000px 100%;
+    @apply animate-shimmer;
+  }
+}
