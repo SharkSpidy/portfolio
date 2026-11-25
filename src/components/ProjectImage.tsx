@@ -40,8 +40,8 @@ export default function ProjectImage({ url, title, className }: ProjectImageProp
 
   if (exhausted) {
     return (
-      <div className={`flex items-center justify-center bg-ink-soft ${className ?? ""}`}>
-        <ImageOff size={22} className="text-paper-dim" />
+      <div className={`flex items-center justify-center bg-surface ${className ?? ""}`}>
+        <ImageOff size={22} className="text-muted" />
       </div>
     );
   }

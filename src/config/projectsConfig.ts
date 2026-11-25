@@ -18,4 +18,6 @@ export const PROJECT_URLS: string[] = [
   "https://paulscafe.vercel.app/",
   "https://rubberbitz.vercel.app/",
   "https://luxebyzaruni-sample.vercel.app/",
+  "https://joystick-ae-org.vercel.app/",
+  "https://eventurex25.github.io/",
 ];

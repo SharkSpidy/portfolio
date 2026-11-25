@@ -2,71 +2,124 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Dark navy is the default. Channels are space-separated RGB so Tailwind
+   opacity modifiers (bg-accent/10) work. */
+:root {
+  color-scheme: dark;
+  --bg: 8 15 33;
+  --surface: 14 24 49;
+  --line: 33 49 84;
+  --fg: 232 238 250;
+  --muted: 158 175 206;
+  --accent: 110 168 255;
+  --on-accent: 6 16 34;
+  --hot: 255 180 84;
+}
+
+:root[data-theme="light"] {
+  color-scheme: light;
+  --bg: 245 248 254;
+  --surface: 255 255 255;
+  --line: 208 218 238;
+  --fg: 12 26 58;
+  --muted: 68 85 122;
+  --accent: 39 86 216;
+  --on-accent: 255 255 255;
+  --hot: 194 65 12;
+}
+
 @layer base {
   html {
     scroll-behavior: smooth;
+    scroll-padding-top: 5rem;
   }
 
   body {
-    @apply bg-ink text-paper font-sans antialiased;
+    @apply bg-bg text-fg font-sans antialiased;
+    transition: background-color 0.3s ease, color 0.3s ease;
   }
 
   ::selection {
-    @apply bg-acid text-ink;
+    @apply bg-accent text-on-accent;
   }
 
-  /* Slim, ink-toned scrollbar */
+  :focus-visible {
+    outline: 2px solid rgb(var(--accent));
+    outline-offset: 3px;
+    border-radius: 2px;
+  }
+
+  a,
+  button {
+    @apply cursor-pointer;
+  }
+
   ::-webkit-scrollbar {
-    width: 8px;
+    width: 10px;
   }
   ::-webkit-scrollbar-track {
-    @apply bg-ink;
+    @apply bg-bg;
   }
   ::-webkit-scrollbar-thumb {
-    @apply bg-ink-line rounded-full;
+    @apply bg-line rounded-full;
   }
   ::-webkit-scrollbar-thumb:hover {
-    @apply bg-acid-dim;
+    @apply bg-accent/60;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html {
+      scroll-behavior: auto;
+    }
   }
 }
 
 @layer components {
-  /* Film-grain texture overlay applied once, fixed, over the whole page */
-  .grain-overlay {
-    @apply pointer-events-none fixed inset-0 z-[999] bg-grain;
+  .section-label {
+    @apply font-mono text-xs uppercase tracking-widest2 text-accent;
   }
 
-  /* Hairline border used everywhere instead of glass/blur panels */
-  .hairline {
-    @apply border border-ink-line;
+  /* Dotted grid used behind the hero */
+  .dot-grid {
+    background-image: radial-gradient(rgb(var(--line)) 1px, transparent 1px);
+    background-size: 26px 26px;
+    mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
+    -webkit-mask-image: radial-gradient(ellipse 70% 60% at 50% 40%, #000 30%, transparent 75%);
   }
 
-  /* Underline-on-hover link treatment, drawn with a real border so it
-     never looks like a generated "glow" effect */
   .link-underline {
     @apply relative inline-block;
   }
   .link-underline::after {
     content: "";
-    @apply absolute left-0 -bottom-0.5 h-px w-0 bg-acid transition-all duration-300;
+    @apply absolute left-0 -bottom-0.5 h-px w-0 bg-accent transition-all duration-300;
   }
   .link-underline:hover::after {
     @apply w-full;
   }
 
-  /* Shimmer for the small bits of copy that load asynchronously */
-  .skeleton-shimmer {
-    background: linear-gradient(
-      90deg,
-      rgba(243, 239, 230, 0.06) 0%,
-      rgba(243, 239, 230, 0.12) 50%,
-      rgba(243, 239, 230, 0.06) 100%
-    );
-    background-size: 1000px 100%;
-    animation: shimmer 1.8s linear infinite;
+  .chip {
+    @apply inline-block rounded-full border border-line bg-surface px-3 py-1 font-mono text-xs text-muted transition-colors duration-200;
   }
-  @keyframes shimmer {
-    0% { background-position: -1000px 0; }
-    100% { background-position: 1000px 0; }
+  .chip:hover {
+    @apply border-accent text-fg;
+  }
+
+  .btn {
+    @apply inline-flex items-center gap-2 rounded-md px-5 py-3 font-mono text-xs uppercase tracking-widest2 transition-all duration-200;
+  }
+  .btn-primary {
+    @apply bg-accent text-on-accent hover:-translate-y-0.5 hover:shadow-[0_8px_24px_-8px_rgb(var(--accent)/0.6)];
+  }
+  .btn-ghost {
+    @apply border border-line text-fg hover:border-accent hover:text-accent;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-spin-slow,
+  .animate-blink,
+  .animate-floaty {
+    animation: none;
   }
 }

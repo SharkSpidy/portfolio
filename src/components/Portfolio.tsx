@@ -36,21 +36,20 @@ export default function Portfolio() {
     <section
       id="work"
       onMouseMove={handleMouseMove}
-      className="relative border-t border-ink-line px-6 py-24 sm:px-10 lg:px-16"
+      className="relative border-t border-line px-6 py-24 sm:px-10 lg:px-16"
     >
       <div className="mx-auto max-w-4xl">
         <div className="flex items-end justify-between">
-          <h2 className="font-mono text-xs uppercase tracking-widest2 text-acid">
-            Selected Work — 2024–2026
-          </h2>
-          <span className="font-mono text-xs text-paper-dim">
+          <h2 className="section-label">03 / Work</h2>
+          <span className="font-mono text-xs text-muted">
             {String(PROJECT_URLS.length).padStart(2, "0")} projects
           </span>
         </div>
 
-        <p className="mt-6 max-w-xl font-display text-3xl leading-tight text-paper sm:text-4xl">
-          Every preview below is pulled live from the deployed site.
+        <p className="mt-6 max-w-xl font-display text-3xl leading-tight text-fg sm:text-4xl">
+          Sites I've built, each previewed from the live deployment.
         </p>
+        <p className="mt-3 hidden font-mono text-xs text-muted md:block">Hover a row to preview it.</p>
 
         <div className="mt-14">
           {PROJECT_URLS.map((url, index) => (
@@ -77,7 +76,7 @@ export default function Portfolio() {
               animate={{ opacity: 1, scale: 1 }}
               exit={{ opacity: 0, scale: 0.92 }}
               transition={{ duration: 0.18 }}
-              className="ml-8 h-44 w-64 -translate-y-1/2 overflow-hidden border border-ink-line bg-ink-soft shadow-[8px_8px_0_0_rgba(204,255,51,0.15)]"
+              className="ml-8 h-44 w-64 -translate-y-1/2 overflow-hidden rounded-md border border-line bg-surface shadow-[8px_8px_0_0_rgb(var(--accent)/0.18)]"
             >
               <ProjectImage url={hoveredUrl} title="Preview" className="h-full w-full object-cover object-top" />
             </motion.div>

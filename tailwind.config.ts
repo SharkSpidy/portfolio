@@ -1,41 +1,43 @@
 import type { Config } from "tailwindcss";
 
+// Colors are CSS variables (see index.css) so one set of class names
+// serves both the dark default and the light theme.
+const token = (name: string) => `rgb(var(--${name}) / <alpha-value>)`;
+
 export default {
   content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
   theme: {
     extend: {
       colors: {
-        // Warm near-black "ink" instead of a neutral/blue-black —
-        // reads as paper-and-print, not "dashboard dark mode".
-        ink: {
-          DEFAULT: "#0d0c0a",
-          soft: "#151310",
-          line: "#2a2722",
-        },
-        paper: {
-          DEFAULT: "#f3efe6",
-          dim: "#a8a296",
-        },
-        // A single, punchy accent used sparingly — not a purple-to-cyan sweep.
-        acid: {
-          DEFAULT: "#ccff33",
-          dim: "#8fb524",
-        },
+        bg: token("bg"),
+        surface: token("surface"),
+        line: token("line"),
+        fg: token("fg"),
+        muted: token("muted"),
+        accent: token("accent"),
+        "on-accent": token("on-accent"),
+        hot: token("hot"),
       },
       fontFamily: {
-        // Serif display for headlines gives it an editorial, hand-set
-        // feel that generic AI-tool sites never reach for.
-        display: ["Fraunces", "serif"],
+        display: ['"Bricolage Grotesque"', "system-ui", "sans-serif"],
         sans: ["Inter", "system-ui", "sans-serif"],
-        mono: ["JetBrains Mono", "ui-monospace", "monospace"],
-      },
-      backgroundImage: {
-        // Subtle film-grain noise, not a radial glow.
-        grain:
-          "url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='120' height='120'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='2' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.05'/%3E%3C/svg%3E\")",
+        mono: ['"JetBrains Mono"', "ui-monospace", "monospace"],
       },
       letterSpacing: {
-        widest2: "0.25em",
+        widest2: "0.22em",
+      },
+      keyframes: {
+        spinSlow: { to: { transform: "rotate(360deg)" } },
+        blink: { "50%": { opacity: "0" } },
+        floaty: {
+          "0%,100%": { transform: "translateY(0)" },
+          "50%": { transform: "translateY(-6px)" },
+        },
+      },
+      animation: {
+        "spin-slow": "spinSlow 28s linear infinite",
+        blink: "blink 1.1s steps(1) infinite",
+        floaty: "floaty 5s ease-in-out infinite",
       },
     },
   },

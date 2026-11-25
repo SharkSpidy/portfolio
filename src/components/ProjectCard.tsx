@@ -30,38 +30,38 @@ export default function ProjectCard({ url, index, isHovered, onHover }: ProjectC
       rel="noopener noreferrer"
       onMouseEnter={() => onHover(index)}
       onMouseLeave={() => onHover(null)}
-      className="group flex flex-col gap-4 border-b border-ink-line py-6 transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:py-8"
+      className="group flex flex-col gap-4 border-b border-line py-6 transition-colors sm:flex-row sm:items-center sm:justify-between sm:gap-6 sm:py-8"
     >
       <div className="flex items-start gap-4 sm:items-center sm:gap-6">
-        <span className="font-mono text-xs tabular-nums text-paper-dim">{number}</span>
+        <span className="font-mono text-xs tabular-nums text-muted">{number}</span>
 
         {/* Inline thumbnail — mobile only, since there's no hover state to reveal one */}
-        <div className="h-16 w-24 shrink-0 overflow-hidden border border-ink-line sm:hidden">
+        <div className="h-16 w-24 shrink-0 overflow-hidden border border-line sm:hidden">
           <ProjectImage url={url} title={data.title} className="h-full w-full object-cover object-top" />
         </div>
 
         <div className="min-w-0">
           <h3
             className={`truncate font-display text-2xl transition-colors duration-200 sm:text-3xl ${
-              isHovered ? "text-acid" : "text-paper"
+              isHovered ? "text-accent" : "text-fg"
             }`}
           >
             {data.title}
           </h3>
-          <p className="mt-1 line-clamp-1 max-w-md text-sm text-paper-dim sm:line-clamp-1">
+          <p className="mt-1 line-clamp-1 max-w-md text-sm text-muted sm:line-clamp-1">
             {data.description}
           </p>
         </div>
       </div>
 
       <div className="flex items-center gap-4 pl-[3.25rem] sm:pl-0">
-        <span className="font-mono text-[11px] uppercase tracking-widest2 text-paper-dim">
+        <span className="font-mono text-[11px] uppercase tracking-widest2 text-muted">
           {data.domain}
         </span>
         <ArrowUpRight
           size={18}
           className={`shrink-0 transition-all duration-200 ${
-            isHovered ? "-translate-y-0.5 translate-x-0.5 text-acid" : "text-paper-dim"
+            isHovered ? "-translate-y-0.5 translate-x-0.5 text-accent" : "text-muted"
           }`}
         />
       </div>
